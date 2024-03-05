@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { FC } from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "primary" | "secondary";
+  variant?: "primary" | "secondary";
 }
 
 const Button: FC<ButtonProps> = ({ variant, ...props }) => {
@@ -14,6 +14,10 @@ const Button: FC<ButtonProps> = ({ variant, ...props }) => {
       {props.children}
     </button>
   );
+};
+
+Button.defaultProps = {
+  variant: "primary",
 };
 
 export default Button;

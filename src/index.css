@@ -22,5 +22,6 @@
     @apply text-white;
     @apply font-outfit;
     @apply font-light;
+    @apply text-body-m;
   }
 }
