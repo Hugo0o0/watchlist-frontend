@@ -1,7 +1,6 @@
 import { Button } from "@/components/UI";
 import { FallbackProps } from "react-error-boundary";
 import { MdError } from "react-icons/md";
-import { useRouteError } from "react-router-dom";
 
 const InvalidTokenFallback = (props: FallbackProps) => {
   if (props.error.name === "InvalidTokenError") {

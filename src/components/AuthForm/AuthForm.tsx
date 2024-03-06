@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import capitialize from "@/utils/capitilaze";
 import { useFormik } from "formik";
 import { loginSchema, registerSchema } from "@/models/authSchema";
-import { authApiLogin, authApiRegister } from "@/api/auth/authApi";
 import useAuth from "@/utils/hooks/auth/useAuth";
 
 interface AuthFormProps {

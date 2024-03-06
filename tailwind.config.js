@@ -19,6 +19,11 @@ export default {
         "body-m": "1.5rem",
         "body-s": "1.3rem",
       },
+      screens: {
+        sm: "376px",
+        md: "768px",
+        lg: "1440px",
+      },
     },
   },
   plugins: [],

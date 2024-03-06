@@ -1,16 +1,17 @@
+import { SidebarIconProps } from "@/@types";
 import { motion } from "framer-motion";
 import { FaStar } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
 
-const Rated = () => {
+const Rated = ({ size }: SidebarIconProps) => {
   // @ts-ignore
   const MotionNavLink = motion(NavLink);
 
   const isMatch = useLocation().pathname === "/rated";
   const props = isMatch
     ? {
-        initial: { scale: 0.5, opacity: 0 },
-        animate: { scale: 1, opacity: 1 },
+        initial: { scale: 0.5 },
+        animate: { scale: 1 },
       }
     : {};
   return (
@@ -21,9 +22,13 @@ const Rated = () => {
       }
       to={"/rated"}
     >
-      <FaStar size={30} className="fill-kashmir-blue" />
+      <FaStar size={size} className="fill-kashmir-blue" />
     </MotionNavLink>
   );
+};
+
+Rated.defaultProps = {
+  size: 25,
 };
 
 export default Rated;
