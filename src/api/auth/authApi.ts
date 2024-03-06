@@ -14,7 +14,7 @@ export const authApiLogin = async (
   email: string,
   password: string
 ): Promise<AxiosResponse<AuthApiResponse> | undefined> => {
-  const toastId = toast.loading("Loading...");
+  const toastId = toast.loading("Checking credentials...");
   try {
     const response = await api.post("/auth/login/email", { email, password });
     toast.success("Login successful");
@@ -30,7 +30,7 @@ export const authApiRegister = async (
   email: string,
   password: string
 ): Promise<AxiosResponse<AuthApiResponse> | undefined> => {
-  const toastId = toast.loading("Loading...");
+  const toastId = toast.loading("Creating account...");
   try {
     const response = await api.post("/auth/register/email", {
       email,
