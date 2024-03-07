@@ -5,13 +5,18 @@ import "./index.css";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import { ErrorBoundary } from "react-error-boundary";
 import InvalidTokenFallback from "./components/ErrorBoundaries/InvalidTokenFallback/InvalidTokenFallback.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ErrorBoundary fallbackRender={InvalidTokenFallback}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <ErrorBoundary fallbackRender={InvalidTokenFallback}>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </ErrorBoundary>
+    </QueryClientProvider>
   </React.StrictMode>
 );
