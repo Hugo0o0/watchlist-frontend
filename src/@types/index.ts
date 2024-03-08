@@ -9,4 +9,5 @@ export interface CardProps {
   name: string;
   year: string;
   status: string;
+  loading?: boolean;
 }

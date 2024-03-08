@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { FC } from "react";
-
+import Skeleton from "react-loading-skeleton";
 import CardDetails from "./CardDetails";
 import { CardProps } from "@/@types";
 import Bookmark from "./Bookmark";
@@ -19,7 +19,17 @@ const Card: FC<CardProps> = ({ size, type, src, name, year, status }) => {
   return (
     <div className={cardClasses}>
       <Bookmark isBookmarked />
-      <img src={src} alt="Image" className={imageClasses} />
+
+      <img
+        onError={(e) => {
+          e.currentTarget.src =
+            "https://via.placeholder.com/300x450?text=No+Image";
+        }}
+        src={src}
+        alt="Image"
+        className={imageClasses}
+      />
+
       <CardDetails
         name={name}
         year={year}
