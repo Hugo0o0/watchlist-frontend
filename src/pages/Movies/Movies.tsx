@@ -35,7 +35,7 @@ const Movies = () => {
         placeholder="Search for movies"
       />
       <div className="gap-5">
-        {<TitledCards title="Movies" items={movies} />}
+        {<TitledCards loading={isLoading} title="Movies" items={movies} />}
         <Spinner visible={isFetching && !isLoading} />
         <div ref={ref} />
       </div>

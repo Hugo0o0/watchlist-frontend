@@ -35,7 +35,7 @@ const Series = () => {
         placeholder="Search for series"
       />
       <div className="gap-5">
-        {<TitledCards title="Series" items={series} />}
+        {<TitledCards loading={isLoading} title="Series" items={series} />}
         <Spinner visible={isFetching && !isLoading} />
         <div ref={ref} />
       </div>

@@ -8,7 +8,7 @@ import {
   Status,
 } from "..";
 
-interface Movie {
+export interface Movie {
   id: string;
   averageRating: number;
   budget: number;

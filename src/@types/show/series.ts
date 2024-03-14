@@ -14,7 +14,7 @@ interface Season {
   name: string;
 }
 
-interface Series {
+export interface Series {
   id: string;
   averageRating: number;
   name: string;

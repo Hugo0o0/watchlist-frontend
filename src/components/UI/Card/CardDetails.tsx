@@ -22,9 +22,7 @@ const CardDetails: FC<CardDetailsProps> = ({
   const typeIcon =
     type === "movie" ? <MdLocalMovies size={15} /> : <PiTelevision size={15} />;
   return (
-    <div
-      className={`${size === "large" && "absolute bottom-2 left-5"} h-full `}
-    >
+    <div className={`${size === "large" && "absolute bottom-2 left-5"} h-full`}>
       <div className={"flex items-center gap-5"}>
         <Text>{year}</Text>
         <div className="flex items-center gap-1">

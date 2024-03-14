@@ -4,6 +4,7 @@ import Layout from "@/components/Layout/Layout";
 import Movies from "@/pages/Movies/Movies";
 import Series from "@/pages/Series/Series";
 import Bookmark from "./pages/Bookmark/Bookmark";
+import Rated from "./pages/Rated/Rated";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
           },
           {
             path: "rated",
-            element: <p>rated</p>,
+            element: <Rated />,
           },
         ],
       },

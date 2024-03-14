@@ -34,3 +34,12 @@ export const getBookmarkedSeries = async (): Promise<SeriesData> => {
   });
   return response.data;
 };
+
+export const getRatedSeries = async (): Promise<SeriesData> => {
+  const response = await api.get("/show/series/rate", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  return response.data;
+};

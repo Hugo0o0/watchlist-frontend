@@ -2,12 +2,13 @@ export interface SidebarIconProps {
   size: number;
 }
 
+export type ShowType = "movies" | "series";
 export interface CardProps {
-  size?: "medium" | "large";
-  type: "movie" | "series";
+  size: "medium" | "large";
+  type: ShowType;
   src: string;
   name: string;
-  year: string;
+  year: number;
   status: string;
   loading?: boolean;
   to: string;
