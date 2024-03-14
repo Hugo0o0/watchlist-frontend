@@ -1,15 +1,18 @@
 import classNames from "classnames";
 import { FC } from "react";
-import Skeleton from "react-loading-skeleton";
 import CardDetails from "./CardDetails";
 import { CardProps } from "@/@types";
-import Bookmark from "./Bookmark";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-const Card: FC<CardProps> = ({ size, type, src, name, year, status }) => {
-  const cardClasses = classNames("rounded-[8px] flex flex-col relative gap-2", {
-    "w-[24rem]  md:w-[47rem] relative": size === "large",
-    "w-[16.4rem] md:w-[28rem] sm:w-[22rem]": size === "medium",
-  });
+const Card: FC<CardProps> = ({ size, type, src, name, year, status, to }) => {
+  const cardClasses = classNames(
+    "rounded-[8px] flex flex-col  relative gap-2",
+    {
+      "w-[24rem]  md:w-[47rem] relative": size === "large",
+      "w-[20rem] md:w-[28rem] sm:w-[22rem]": size === "medium",
+    }
+  );
 
   const imageClasses = classNames("w-full", {
     "h-full": size === "large",
@@ -17,27 +20,31 @@ const Card: FC<CardProps> = ({ size, type, src, name, year, status }) => {
   });
 
   return (
-    <div className={cardClasses}>
-      <Bookmark isBookmarked />
+    <Link to={to}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className={cardClasses}
+      >
+        <img
+          onError={(e) => {
+            e.currentTarget.src =
+              "https://via.placeholder.com/300x450?text=No+Image";
+          }}
+          src={src}
+          alt="Image"
+          className={imageClasses}
+        />
 
-      <img
-        onError={(e) => {
-          e.currentTarget.src =
-            "https://via.placeholder.com/300x450?text=No+Image";
-        }}
-        src={src}
-        alt="Image"
-        className={imageClasses}
-      />
-
-      <CardDetails
-        name={name}
-        year={year}
-        status={status}
-        size={size!}
-        type={type}
-      />
-    </div>
+        <CardDetails
+          name={name}
+          year={year}
+          status={status}
+          size={size!}
+          type={type}
+        />
+      </motion.div>
+    </Link>
   );
 };
 

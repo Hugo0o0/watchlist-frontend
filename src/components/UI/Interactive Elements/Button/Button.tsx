@@ -1,11 +1,10 @@
 import classNames from "classnames";
 import { FC, forwardRef } from "react";
-import { ColorRing } from "react-loader-spinner";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
   loading?: boolean;
-  btnRef: React.LegacyRef<HTMLButtonElement>;
+  btnRef?: React.LegacyRef<HTMLButtonElement>;
 }
 
 const Button: FC<ButtonProps> = forwardRef(({ loading, btnRef, ...props }) => {

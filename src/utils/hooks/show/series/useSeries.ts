@@ -1,12 +1,12 @@
 import { CardProps } from "@/@types";
-import { getMovies } from "@/api/show/movie";
+import { getSeries } from "@/api/show/series";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-const useMovies = () => {
+const useSeries = () => {
   const { data, isLoading, fetchNextPage, isFetching, hasNextPage, refetch } =
     useInfiniteQuery({
-      queryKey: ["movies"],
-      queryFn: getMovies,
+      queryKey: ["series"],
+      queryFn: getSeries,
       initialPageParam: 1,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
@@ -16,20 +16,21 @@ const useMovies = () => {
       },
     });
 
-  const movies: CardProps[] | undefined = data?.pages?.flatMap((movie) => {
-    return movie.data.map((item) => ({
+  const series: CardProps[] | undefined = data?.pages?.flatMap((tv) => {
+    return tv.data.map((item) => ({
       key: item.id,
-      name: item.title,
+      name: item.name,
       src: item.poster?.small ?? "",
       size: "medium",
-      year: new Date(item.releaseDate).getFullYear().toString(),
-      type: "movie",
+      year: new Date(item.firstAirDate).getFullYear().toString(),
+      type: "series",
       status: item.status,
-      to: `/movies/${item.id}`,
+      to: `/series/${item.id}`,
     }));
   });
+
   return {
-    movies,
+    series,
     isLoading,
     fetchNextPage,
     isFetching,
@@ -38,4 +39,4 @@ const useMovies = () => {
   };
 };
 
-export default useMovies;
+export default useSeries;

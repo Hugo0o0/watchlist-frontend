@@ -1,8 +1,9 @@
 import { MovieData } from "@/@types/show/movie";
 import api from "../api";
+import { SeriesData } from "@/@types/show/series";
 
-export const getMovies = async (props: any): Promise<MovieData> => {
-  const response = await api.get("/show/movie", {
+export const getSeries = async (props: any): Promise<SeriesData> => {
+  const response = await api.get("/show/series", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -13,8 +14,8 @@ export const getMovies = async (props: any): Promise<MovieData> => {
   return response.data;
 };
 
-export const searchMovies = async (query: string) => {
-  const response = await api.get("/show/search/movie", {
+export const searchSeries = async (query: string): Promise<SeriesData> => {
+  const response = await api.get("/show/search/series", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -25,8 +26,8 @@ export const searchMovies = async (query: string) => {
   return response.data;
 };
 
-export const getBookmarkedMovies = async (): Promise<MovieData> => {
-  const response = await api.get("/show/movie/bookmark", {
+export const getBookmarkedSeries = async (): Promise<SeriesData> => {
+  const response = await api.get("/show/series/bookmark", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },

@@ -19,6 +19,10 @@ export default {
         "body-m": "1.5rem",
         "body-s": "1.3rem",
       },
+
+      gridTemplateColumns: {
+        "auto-responsive": "repeat(auto-fit, minmax(28rem, 1fr))",
+      },
       screens: {
         sm: "376px",
         md: "768px",

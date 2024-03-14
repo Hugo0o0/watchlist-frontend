@@ -7,7 +7,7 @@ const Bookmark = ({ size }: SidebarIconProps) => {
   // @ts-ignore
   const MotionNavLink = motion(NavLink);
 
-  const isMatch = useLocation().pathname === "/bookmarked";
+  const isMatch = useLocation().pathname === "/bookmark";
   const props = isMatch
     ? {
         initial: { scale: 0.5 },
@@ -20,7 +20,7 @@ const Bookmark = ({ size }: SidebarIconProps) => {
       className={({ isActive }) =>
         [isActive ? "[&>*]:fill-white" : "[&>*]:fill-kashmir-blue"].join(" ")
       }
-      to={"/bookmarked"}
+      to={"/bookmark"}
     >
       <FaBookmark size={size} className="fill-kashmir-blue" />
     </MotionNavLink>

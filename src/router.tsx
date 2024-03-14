@@ -1,7 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home, Login, Private, Register } from "./pages";
 import Layout from "@/components/Layout/Layout";
-import Movies from "./pages/Movies/Movies";
+import Movies from "@/pages/Movies/Movies";
+import Series from "@/pages/Series/Series";
+import Bookmark from "./pages/Bookmark/Bookmark";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
           },
           {
             path: "series",
-            element: <p>Series</p>,
+            element: <Series />,
             children: [
               {
                 path: "series/:id",
@@ -32,8 +34,8 @@ const router = createBrowserRouter([
             ],
           },
           {
-            path: "bookmarked",
-            element: <p>Bookmarked</p>,
+            path: "bookmark",
+            element: <Bookmark />,
           },
           {
             path: "rated",
@@ -50,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "register",
     element: <Register />,
+  },
+  {
+    path: "*",
+    element: <p>404</p>,
   },
 ]);
 

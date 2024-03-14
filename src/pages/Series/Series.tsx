@@ -1,15 +1,15 @@
 import TitledCards from "@/components/TitledCards/TitledCards";
-import useMovies from "@/utils/hooks/show/movie/useMovies";
 import { FormInput, Spinner } from "@/components/UI";
 import useInfiniteLoaderInview from "@/utils/hooks/useInfiniteLoaderInview";
 import { FaSearch } from "react-icons/fa";
-import useSearchMovie from "@/utils/hooks/show/movie/useSearchMovie";
 import debounce from "lodash.debounce";
+import useSeries from "@/utils/hooks/show/series/useSeries";
+import useSearchSeries from "@/utils/hooks/show/series/useSearchSeries";
 
-const Movies = () => {
-  const { movies, fetchNextPage, isFetching, isLoading, hasNextPage, refetch } =
-    useMovies();
-  const { mutate } = useSearchMovie();
+const Series = () => {
+  const { series, fetchNextPage, isFetching, isLoading, hasNextPage, refetch } =
+    useSeries();
+  const { mutate } = useSearchSeries();
   const handleLoadMore = (inView: boolean) => {
     if (inView && hasNextPage) {
       fetchNextPage();
@@ -32,10 +32,10 @@ const Movies = () => {
         type="search"
         onChange={debounce(handleSearch, 500)}
         icon={<FaSearch size={20} />}
-        placeholder="Search for movies"
+        placeholder="Search for series"
       />
       <div className="gap-5">
-        {<TitledCards title="Movies" items={movies} />}
+        {<TitledCards title="Series" items={series} />}
         <Spinner visible={isFetching && !isLoading} />
         <div ref={ref} />
       </div>
@@ -43,4 +43,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default Series;

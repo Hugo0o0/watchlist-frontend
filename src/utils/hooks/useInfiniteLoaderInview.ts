@@ -7,7 +7,7 @@ type OnChangeHanlder = (inView: boolean) => void;
 
 const useInfiniteLoaderInview = (onChange: OnChangeHanlder) => {
   const { ref } = useInView({
-    delay: 300,
+    delay: 600,
     initialInView: false,
     onChange,
   });
