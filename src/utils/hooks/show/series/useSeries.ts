@@ -1,5 +1,6 @@
 import { CardProps } from "@/@types";
 import { getSeries } from "@/api/show/series";
+import { seriesDataToCardProps } from "@/utils/showToCardProps";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 const useSeries = () => {
@@ -17,16 +18,7 @@ const useSeries = () => {
     });
 
   const series: CardProps[] | undefined = data?.pages?.flatMap((tv) => {
-    return tv.data.map((item) => ({
-      key: item.id,
-      name: item.name,
-      src: item.poster?.small ?? "",
-      size: "medium",
-      year: new Date(item.firstAirDate).getFullYear().toString(),
-      type: "series",
-      status: item.status,
-      to: `/series/${item.id}`,
-    }));
+    return seriesDataToCardProps(tv.data);
   });
 
   return {

@@ -1,8 +1,5 @@
 import { useInView } from "react-intersection-observer";
 
-interface UseInfiniteLoaderInview {
-  onChange: (inView: boolean) => void;
-}
 type OnChangeHanlder = (inView: boolean) => void;
 
 const useInfiniteLoaderInview = (onChange: OnChangeHanlder) => {

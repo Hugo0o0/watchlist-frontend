@@ -1,5 +1,6 @@
 import { CardProps } from "@/@types";
 import { getMovies } from "@/api/show/movie";
+import { movieDataToCardProps } from "@/utils/showToCardProps";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 const useMovies = () => {
@@ -17,16 +18,7 @@ const useMovies = () => {
     });
 
   const movies: CardProps[] | undefined = data?.pages?.flatMap((movie) => {
-    return movie.data.map((item) => ({
-      key: item.id,
-      name: item.title,
-      src: item.poster?.small ?? "",
-      size: "medium",
-      year: new Date(item.releaseDate).getFullYear().toString(),
-      type: "movie",
-      status: item.status,
-      to: `/movies/${item.id}`,
-    }));
+    return movieDataToCardProps(movie.data);
   });
   return {
     movies,

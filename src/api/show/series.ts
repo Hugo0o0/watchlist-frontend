@@ -1,4 +1,3 @@
-import { MovieData } from "@/@types/show/movie";
 import api from "../api";
 import { SeriesData } from "@/@types/show/series";
 
