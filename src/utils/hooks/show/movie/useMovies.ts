@@ -9,8 +9,6 @@ const useMovies = () => {
       queryKey: ["movies"],
       queryFn: getMovies,
       initialPageParam: 1,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
       getNextPageParam: (data) => {
         if (!data?.metadata?.hasNextPage) return undefined;
         return data.metadata.nextPage;

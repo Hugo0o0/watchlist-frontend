@@ -12,6 +12,7 @@ export const movieDataToCardProps = (data?: Movie[]): CardProps[] => {
     to: `/movies/${movie.id}`,
     type: "movies",
     year: new Date(movie.releaseDate).getFullYear(),
+    key: movie.id,
   }));
 };
 
@@ -25,5 +26,6 @@ export const seriesDataToCardProps = (data?: Series[]): CardProps[] => {
     to: `/movies/${movie.id}`,
     type: "movies",
     year: new Date(movie.firstAirDate).getFullYear(),
+    key: movie.id,
   }));
 };

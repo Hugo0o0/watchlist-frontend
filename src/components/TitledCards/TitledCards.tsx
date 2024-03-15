@@ -13,7 +13,7 @@ const TitledCards: FC<TitledCardsProps> = ({ title, items, loading }) => {
   if (loading) return <CardsSkeleton />;
   return (
     <div className="flex flex-col gap-5">
-      {items && items?.length > 0 && <Heading>{title}</Heading>}
+      {items && items?.length > 0 && <Heading size="l">{title}</Heading>}
       <div className="grid transition-all justify-items-center md:justify-items-start grid-cols-auto-responsive gap-5">
         {items && items.map((item) => <Card {...item} />)}
       </div>

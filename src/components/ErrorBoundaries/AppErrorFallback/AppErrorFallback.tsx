@@ -2,7 +2,7 @@ import { Button } from "@/components/UI";
 import { FallbackProps } from "react-error-boundary";
 import { MdError } from "react-icons/md";
 
-const InvalidTokenFallback = (props: FallbackProps) => {
+const AppErrorFallback = (props: FallbackProps) => {
   if (props.error.name === "InvalidTokenError") {
     localStorage.removeItem("token");
   }
@@ -16,4 +16,4 @@ const InvalidTokenFallback = (props: FallbackProps) => {
   );
 };
 
-export default InvalidTokenFallback;
+export default AppErrorFallback;

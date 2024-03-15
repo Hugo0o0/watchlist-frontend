@@ -19,6 +19,9 @@ export default {
         "body-m": "1.5rem",
         "body-s": "1.3rem",
       },
+      backgroundImage: {
+        "not-found": "url(/public/not-found.jpg)",
+      },
 
       gridTemplateColumns: {
         "auto-responsive": "repeat(auto-fit, minmax(28rem, 1fr))",

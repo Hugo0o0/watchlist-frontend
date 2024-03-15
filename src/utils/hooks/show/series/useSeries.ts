@@ -9,8 +9,6 @@ const useSeries = () => {
       queryKey: ["series"],
       queryFn: getSeries,
       initialPageParam: 1,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
       getNextPageParam: (data) => {
         if (!data?.metadata?.hasNextPage) return undefined;
         return data.metadata.nextPage;

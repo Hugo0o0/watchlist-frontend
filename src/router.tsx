@@ -5,6 +5,8 @@ import Movies from "@/pages/Movies/Movies";
 import Series from "@/pages/Series/Series";
 import Bookmark from "./pages/Bookmark/Bookmark";
 import Rated from "./pages/Rated/Rated";
+import PagesErrorFallback from "./components/ErrorBoundaries/PagesErrorFallback/PagesErrorFallback";
+import NotFound from "./components/ErrorBoundaries/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -13,50 +15,52 @@ const router = createBrowserRouter([
       {
         element: <Layout />,
         children: [
-          { index: true, element: <Home /> },
           {
-            path: "movies",
-            element: <Movies />,
+            errorElement: <PagesErrorFallback />,
             children: [
+              { index: true, element: <Home /> },
               {
-                path: "movies/:id",
-                element: <p>Specific Movie</p>,
+                path: "movies",
+                element: <Movies />,
+                id: "movies",
+              },
+              {
+                path: "series",
+                id: "series",
+                element: <Series />,
+              },
+              {
+                path: "bookmark",
+                id: "bookmark",
+                element: <Bookmark />,
+              },
+              {
+                path: "rated",
+                id: "rated",
+                element: <Rated />,
               },
             ],
-          },
-          {
-            path: "series",
-            element: <Series />,
-            children: [
-              {
-                path: "series/:id",
-                element: <p>Specific Series</p>,
-              },
-            ],
-          },
-          {
-            path: "bookmark",
-            element: <Bookmark />,
-          },
-          {
-            path: "rated",
-            element: <Rated />,
           },
         ],
       },
     ],
   },
   {
-    path: "login",
-    element: <Login />,
-  },
-  {
-    path: "register",
-    element: <Register />,
-  },
-  {
-    path: "*",
-    element: <p>404</p>,
+    errorElement: <PagesErrorFallback />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
   },
 ]);
 
