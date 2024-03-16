@@ -23,8 +23,8 @@ export const seriesDataToCardProps = (data?: Series[]): CardProps[] => {
     size: "medium",
     src: movie.poster.small,
     status: movie.status,
-    to: `/movies/${movie.id}`,
-    type: "movies",
+    to: `/series/${movie.id}`,
+    type: "series",
     year: new Date(movie.firstAirDate).getFullYear(),
     key: movie.id,
   }));

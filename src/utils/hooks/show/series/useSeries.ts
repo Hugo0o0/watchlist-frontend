@@ -6,7 +6,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 const useSeries = () => {
   const { data, isLoading, fetchNextPage, isFetching, hasNextPage, refetch } =
     useInfiniteQuery({
-      queryKey: ["series"],
+      queryKey: ["singleSeries"],
       queryFn: getSeries,
       initialPageParam: 1,
       getNextPageParam: (data) => {
