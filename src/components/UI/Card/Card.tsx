@@ -10,11 +10,11 @@ const Card: FC<CardProps> = ({ size, type, src, name, year, status, to }) => {
     "rounded-[8px] flex flex-col  relative gap-2",
     {
       "w-[24rem]  md:w-[47rem] relative": size === "large",
-      "w-[20rem] md:w-[28rem] sm:w-[22rem]": size === "medium",
+      "w-[16.4rem] md:w-[28rem] sm:w-[22rem]": size === "medium",
     }
   );
 
-  const imageClasses = classNames("w-full", {
+  const imageClasses = classNames("w-full rounded-[8px]", {
     "h-full": size === "large",
     "h-[11rem] sm:h-[14rem] md:h-[17.4rem]": size === "medium",
   });

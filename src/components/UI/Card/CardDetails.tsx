@@ -36,7 +36,7 @@ const CardDetails: FC<CardDetailsProps> = ({
         </div>
         <Text>{status}</Text>
       </div>
-      <Heading size="s">{name}</Heading>
+      <Heading size="xs">{name}</Heading>
     </div>
   );
 };

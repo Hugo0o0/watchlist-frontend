@@ -19,7 +19,7 @@ export const getSingleSeries = async (id?: string): Promise<Series> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
-  return response.data;
+  return response.data.data;
 };
 
 export const searchSeries = async (query: string): Promise<SeriesData> => {

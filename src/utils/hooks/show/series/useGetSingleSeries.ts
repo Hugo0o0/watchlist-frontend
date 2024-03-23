@@ -1,11 +1,12 @@
 import { getSingleSeries } from "@/api/show/series";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetSeries = (id?: string) => {
+const useGetSingleSeries = (id?: string) => {
   return useQuery({
-    queryKey: ["series"],
+    queryKey: ["single series", id],
+    refetchOnWindowFocus: false,
     queryFn: getSingleSeries.bind(null, id),
   });
 };
 
-export default useGetSeries;
+export default useGetSingleSeries;

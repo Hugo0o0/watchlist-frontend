@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 const useSearchSeries = () => {
   const queryClient = useQueryClient();
   return useMutation({
+    mutationKey: ["search series"],
     mutationFn: (query: string) => searchSeries(query),
     onSuccess: (data) => {
       queryClient.setQueryData(["series"], (prev: any) => {
