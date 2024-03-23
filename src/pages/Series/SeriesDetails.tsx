@@ -1,6 +1,6 @@
-import { Button, Heading, Text } from "@/components/UI";
+import { Text } from "@/components/UI";
 import useGetSingleSeries from "@/utils/hooks/show/series/useGetSingleSeries";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FaArrowDown } from "react-icons/fa";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 

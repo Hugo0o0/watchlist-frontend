@@ -27,8 +27,8 @@ const CardsSkeleton: FC<CardsSkeletonProps> = ({ size, count }) => {
       direction="ltr"
     >
       <div className="grid transition-all justify-items-center md:justify-items-start grid-cols-2  sm:grid-cols-auto-responsive gap-5">
-        {Array.from({ length: count }).map((_, i) => (
-          <div className={cardSkeletonClasses}>
+        {Array.from({ length: count }).map(() => (
+          <div className={cardSkeletonClasses} key={Math.random() * 10}>
             <Skeleton className={imageSkeletonClasses} />
             <Skeleton
               inline
