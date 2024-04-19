@@ -24,6 +24,7 @@ const Card: FC<CardProps> = ({ size, type, src, name, year, status, to }) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         className={cardClasses}
       >
         <img

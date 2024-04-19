@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 import { FC } from "react";
 import capitialize from "@/utils/capitilaze";
 import { motion } from "framer-motion";
+import { ErrorCodes } from "@/@types";
+import messagesByErrorCode from "@/utils/constant";
+
 interface ErrorMessageProps {
-  message?: string;
+  code?: ErrorCodes;
   to?: string;
-  subMessage?: string;
 }
 
-const ErrorMessage: FC<ErrorMessageProps> = ({ message, to, subMessage }) => {
+const ErrorMessage: FC<ErrorMessageProps> = ({ to, code }) => {
   const redirectPageName = to === "/" ? "Home" : capitialize(to!);
+
   return (
     <motion.div
       initial={{
@@ -23,8 +26,8 @@ const ErrorMessage: FC<ErrorMessageProps> = ({ message, to, subMessage }) => {
       className="flex w-full flex-col text-center justify-center items-center gap-7"
     >
       <MdError size={50} className="animate-bounce" />
-      <Heading size="m">{message}</Heading>
-      <Text>{subMessage}</Text>
+      <Heading size="m">{messagesByErrorCode[code!].message}</Heading>
+      <Text>{messagesByErrorCode[code!].subMessage}</Text>
       <Link to={to!}>
         <Button> {redirectPageName}</Button>
       </Link>
@@ -33,9 +36,8 @@ const ErrorMessage: FC<ErrorMessageProps> = ({ message, to, subMessage }) => {
 };
 
 ErrorMessage.defaultProps = {
+  code: 500,
   to: "/",
-  message: "The page you are looking for does not exist",
-  subMessage: "Head back to home page",
 };
 
 export default ErrorMessage;

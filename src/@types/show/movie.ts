@@ -25,8 +25,8 @@ export interface Movie {
   runtime: number;
   status: string;
   title: string;
-  rating: number;
-  isBookmarked: boolean;
+  rating: number | null;
+  bookmarked: boolean;
 }
 
 export interface MovieData {

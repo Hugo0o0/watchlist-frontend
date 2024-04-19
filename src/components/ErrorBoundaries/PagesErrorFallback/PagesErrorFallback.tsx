@@ -1,23 +1,15 @@
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
-import { useLocation, useRouteError } from "react-router-dom";
+import { useRouteError } from "react-router-dom";
 
 const PagesErrorFallback = () => {
   const error: any = useRouteError();
-  const location = useLocation();
-  const currentPath =
-    location.pathname === "/" ? "home" : location.pathname.slice(1);
-  const errorSubMessage = `Can not load ${currentPath} page. Please try again later.`;
-
-  let errorMessage;
+  let code;
   if (error.response) {
-    errorMessage = `${error.response.data.message} (${error.response.status})`;
+    code = error.response.status;
   } else {
-    errorMessage = error.message;
+    code = 500;
   }
-
-  return (
-    <ErrorMessage message={errorMessage} subMessage={errorSubMessage} to="/" />
-  );
+  return <ErrorMessage code={code} />;
 };
 
 export default PagesErrorFallback;

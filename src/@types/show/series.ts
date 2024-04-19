@@ -29,6 +29,8 @@ export interface Series {
   status: string;
   seasons: Season[];
   ratings: RatingData[];
+  bookmarked: boolean;
+  rating: number | null;
 }
 
 export interface SeriesData {

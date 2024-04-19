@@ -9,6 +9,9 @@ export default {
         "kashmir-blue": "hsl(var(--clr-kashmir-blue) / <alpha-value>)",
         mirage: "hsl(var(--clr-mirage) / <alpha-value>)",
       },
+      backgroundColor: {
+        modal: "hsl(0, 0%, 0%, 0.8)",
+      },
       fontFamily: {
         outfit: ["Outfit", "sans-serif"],
       },

@@ -12,7 +12,7 @@ const Rated = () => {
     <div className="w-full flex flex-col gap-5">
       <TitledCards loading={isLoading} title="Movies" items={movies} />
       <TitledCards loading={isLoading} title="Series" items={series} />
-      {!hasRatedShows && (
+      {!hasRatedShows && !isLoading && (
         <NoItems
           itemIcon={<MdMovie size={40} />}
           message="You didn't rate any shows yet"

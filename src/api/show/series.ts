@@ -51,3 +51,40 @@ export const getRatedSeries = async (): Promise<SeriesData> => {
   });
   return response.data;
 };
+export const bookmarkSeries = async (id: string): Promise<Series> => {
+  const response = await api.post(`/show/series/bookmark/${id}`, null, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  return response.data.data;
+};
+
+export const removebookmarkSeries = async (id: string): Promise<Series> => {
+  const response = await api.delete(`/show/series/bookmark/${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  return response.data.data;
+};
+
+export const rateSeries = async (
+  id: string,
+  rating: number,
+  ratingId?: string
+): Promise<Series> => {
+  const response = await api.post(
+    `/show/series/rate/${id}`,
+    {
+      rating,
+      ratingId,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  return response.data;
+};

@@ -13,7 +13,7 @@ const Bookmark = () => {
       <TitledCards loading={isLoading} title="Movies" items={movies} />
       <TitledCards loading={isLoading} title="Series" items={series} />
 
-      {!hasBookmarkedShows && (
+      {!hasBookmarkedShows && !isLoading && (
         <NoItems
           itemIcon={<MdMovie size={40} />}
           message="You didn't bookmark any shows yet"

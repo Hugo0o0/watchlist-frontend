@@ -51,4 +51,14 @@ export interface ProductionCountryData {
 export interface RatingData {
   id: string;
   rating: number;
+  userId: string;
 }
+
+export type ErrorCodes = 404 | 401 | 500;
+
+export type MessageByErrorCode = {
+  [key in ErrorCodes]: {
+    message: string;
+    subMessage: string;
+  };
+};
