@@ -30,14 +30,21 @@ const SeriesDetails = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="w-full p-5 flex gap-5"
+      className="w-full p-5 flex gap-5 flex-col md:flex-row md:gap-10"
     >
       <RateSeriesModal open={openModal} close={handleModal} />
-      <img src={data?.poster.large} alt={data?.name} className="h-[65rem]" />
+      <img
+        src={data?.poster.large}
+        alt={data?.name}
+        className="h-[65rem]"
+        onError={(e) => {
+          e.currentTarget.src = "https://placehold.co/433X650";
+        }}
+      />
       <div className="w-full flex flex-col gap-5">
         {/* İsim, yer işareti, oyla */}
-        <div className="flex justify-between items-center">
-          <div className="flex items-center justify-center gap-3">
+        <div className="flex flex-col md:flex-row md:gap-10 justify-between items-center">
+          <div className="flex items-center justify-center gap-3 flex-col md:flex-row">
             <Heading size="l">{data?.name}</Heading>
             <Text>
               ({firstAirYear} - {lastAirYear})
@@ -46,7 +53,7 @@ const SeriesDetails = () => {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-3">
               <FaStar />
-              <Text>{data.averageRating} / 10</Text>
+              <Text>{data.averageRating.toFixed(1)} / 10</Text>
             </div>
 
             <BookmarkSeries bookmarked={data.bookmarked} />

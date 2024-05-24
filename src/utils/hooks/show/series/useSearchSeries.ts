@@ -1,5 +1,7 @@
 import { searchSeries } from "@/api/show/series";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 const useSearchSeries = () => {
   const queryClient = useQueryClient();
@@ -16,6 +18,10 @@ const useSearchSeries = () => {
     },
     onSettled: () => {
       queryClient.cancelQueries({ queryKey: ["series"] });
+    },
+    throwOnError: false,
+    onError: (error: AxiosError<{ message: string }>) => {
+      toast.error(error.response?.data.message || "An error occurred");
     },
   });
 };

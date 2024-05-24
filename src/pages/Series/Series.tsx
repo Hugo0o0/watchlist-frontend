@@ -19,8 +19,9 @@ const Series = () => {
   const { ref } = useInfiniteLoaderInview(handleLoadMore);
 
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value) {
-      mutate(e.target.value);
+    const value = e.target.value.trim();
+    if (value.length >= 3) {
+      mutate(value);
     } else {
       refetch();
     }
@@ -28,12 +29,14 @@ const Series = () => {
 
   return (
     <div className="flex flex-col gap-5 w-full">
-      <FormInput
-        type="search"
-        onChange={debounce(handleSearch, 500)}
-        icon={<FaSearch size={20} />}
-        placeholder="Search for series"
-      />
+      {!isLoading && (
+        <FormInput
+          type="search"
+          onChange={debounce(handleSearch, 500)}
+          icon={<FaSearch size={20} />}
+          placeholder="Search for series"
+        />
+      )}
       <div className="gap-5">
         {<TitledCards loading={isLoading} title="Series" items={series} />}
         <Spinner visible={isFetching && !isLoading} />

@@ -9,8 +9,16 @@ import { useQueries } from "@tanstack/react-query";
 const useGetRated = () => {
   const [movies, series] = useQueries({
     queries: [
-      { queryKey: ["ratedMovies"], queryFn: getRatedMovies },
-      { queryKey: ["ratedSeries"], queryFn: getRatedSeries },
+      {
+        queryKey: ["ratedMovies"],
+        queryFn: getRatedMovies,
+        refetchOnMount: true,
+      },
+      {
+        queryKey: ["ratedSeries"],
+        queryFn: getRatedSeries,
+        refetchOnMount: true,
+      },
     ],
   });
 

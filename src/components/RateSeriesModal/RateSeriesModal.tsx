@@ -5,6 +5,8 @@ import useGetSingleSeries from "@/utils/hooks/show/series/useGetSingleSeries";
 import { useParams } from "react-router-dom";
 import useRateSeries from "@/utils/hooks/show/series/useRateSeries";
 import { jwtDecode } from "jwt-decode";
+import useUpdateSeries from "@/utils/hooks/show/series/useUpdateSeries";
+import useDeleteSeriesRating from "@/utils/hooks/show/series/useDeleteSeriesRating";
 
 interface RateSeriesModalProps {
   open: boolean;
@@ -16,12 +18,16 @@ const RateSeriesModal: FC<RateSeriesModalProps> = ({ open, close }) => {
   const { data } = useGetSingleSeries(id);
   const [rating, setRating] = useState<number>(data?.rating || 0);
   const { mutate, isPending } = useRateSeries();
+  const { mutate: updateRating } = useUpdateSeries();
+  const { mutateAsync: deleteRating, isPending: isDeletePending } =
+    useDeleteSeriesRating();
 
   const handleRatingChange = (value: number | null) => {
     setRating(value || 0);
   };
 
   const handleRate = () => {
+    console.log("rate working");
     const token = jwtDecode<{ id: string }>(localStorage.getItem("token")!);
     const ratingId = data?.ratings.find((r) => r.userId === token.id)?.id;
     mutate({
@@ -29,6 +35,28 @@ const RateSeriesModal: FC<RateSeriesModalProps> = ({ open, close }) => {
       rating,
       ratingId,
     });
+  };
+
+  const handleUpdateRating = () => {
+    console.log("update working");
+
+    const token = jwtDecode<{ id: string }>(localStorage.getItem("token")!);
+    const ratingId = data?.ratings.find((r) => r.userId === token.id)?.id;
+    updateRating({
+      ratingId: ratingId!,
+      rating,
+      seriesId: data?.id!,
+    });
+  };
+
+  const handleDeleteRating = async () => {
+    const token = jwtDecode<{ id: string }>(localStorage.getItem("token")!);
+    const ratingId = data?.ratings.find((r) => r.userId === token.id)?.id;
+    await deleteRating({
+      id: data?.id!,
+      ratingId: ratingId!,
+    });
+    setRating(0);
   };
 
   return (
@@ -45,10 +73,20 @@ const RateSeriesModal: FC<RateSeriesModalProps> = ({ open, close }) => {
           loading={isPending}
           variant="secondary"
           disabled={data?.rating === rating}
-          onClick={handleRate}
+          onClick={data?.rating ? handleUpdateRating : handleRate}
         >
           {data?.rating ? "Update Rating" : "Rate"}
         </Button>
+
+        {data?.rating && (
+          <Button
+            onClick={handleDeleteRating}
+            disabled={isDeletePending}
+            loading={isDeletePending}
+          >
+            Delete Rating
+          </Button>
+        )}
       </DialogContent>
     </Dialog>
   );

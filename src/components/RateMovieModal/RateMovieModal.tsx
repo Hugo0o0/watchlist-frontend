@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import useMovie from "@/utils/hooks/show/movie/useMovie";
 import useRateMovie from "@/utils/hooks/show/movie/useRateMovie";
+import useUpdateRating from "@/utils/hooks/show/movie/useUpdateRating";
+import useDeleteMovieRating from "@/utils/hooks/show/movie/useDeleteMovieRating";
 
 interface RateMovieModalProps {
   open: boolean;
@@ -13,23 +15,47 @@ interface RateMovieModalProps {
 
 const RateMovieModal: FC<RateMovieModalProps> = ({ open, close }) => {
   const { id } = useParams<{ id: string }>();
-  const { data } = useMovie(id!);
+  const { data, isFetching: isMoviePending } = useMovie(id!);
   const [rating, setRating] = useState<number>(data?.rating || 0);
   const { mutate, isPending } = useRateMovie();
+  const { mutate: updateRating, isPending: isUpdatePending } =
+    useUpdateRating();
+  const { mutateAsync: deleteRating, isPending: isDeletePending } =
+    useDeleteMovieRating();
 
   const handleRatingChange = (value: number | null) => {
     setRating(value || 0);
   };
 
   const handleRate = () => {
-    const token = jwtDecode<{ id: string }>(localStorage.getItem("token")!);
-    const ratingId = data?.ratings.find((r) => r.userId === token.id)?.id;
     mutate({
       id: data?.id!,
       rating,
-      ratingId,
     });
   };
+
+  const handleUpdateRating = () => {
+    const token = jwtDecode<{ id: string }>(localStorage.getItem("token")!);
+    const ratingId = data?.ratings.find((r) => r.userId === token.id)?.id;
+    updateRating({
+      id: data?.id!,
+      rating,
+      ratingId: ratingId!,
+    });
+  };
+
+  const handleDeleteRating = async () => {
+    const token = jwtDecode<{ id: string }>(localStorage.getItem("token")!);
+    const ratingId = data?.ratings.find((r) => r.userId === token.id)?.id;
+    await deleteRating({
+      id: data?.id!,
+      ratingId: ratingId!,
+    });
+    setRating(0);
+  };
+
+  const isLoading =
+    isPending || isUpdatePending || isDeletePending || isMoviePending;
 
   return (
     <Dialog open={open} onClose={!isPending ? close : () => {}}>
@@ -42,13 +68,18 @@ const RateMovieModal: FC<RateMovieModalProps> = ({ open, close }) => {
           onChange={(_, v) => handleRatingChange(v)}
         />
         <Button
-          loading={isPending}
+          loading={isLoading}
           variant="secondary"
           disabled={data?.rating === rating}
-          onClick={handleRate}
+          onClick={data?.rating ? handleUpdateRating : handleRate}
         >
           {data?.rating ? "Update Rating" : "Rate"}
         </Button>
+        {data?.rating && (
+          <Button loading={isLoading} onClick={handleDeleteRating}>
+            Delete Rating
+          </Button>
+        )}
       </DialogContent>
     </Dialog>
   );

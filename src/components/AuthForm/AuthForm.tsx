@@ -90,7 +90,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       </div>
     </form>
   ) : (
-    <Navigate to="/" />
+    <Navigate to="/movies" />
   );
 };
 

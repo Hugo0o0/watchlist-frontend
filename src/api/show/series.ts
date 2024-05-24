@@ -71,14 +71,12 @@ export const removebookmarkSeries = async (id: string): Promise<Series> => {
 
 export const rateSeries = async (
   id: string,
-  rating: number,
-  ratingId?: string
+  rating: number
 ): Promise<Series> => {
   const response = await api.post(
     `/show/series/rate/${id}`,
     {
       rating,
-      ratingId,
     },
     {
       headers: {
@@ -86,5 +84,40 @@ export const rateSeries = async (
       },
     }
   );
+  return response.data;
+};
+
+export const updateSeries = async (
+  seriesId: string,
+  ratingId: string,
+  rating: number
+): Promise<Series> => {
+  const response = await api.put(
+    `/show/series/${seriesId}`,
+    {
+      ratingId,
+      rating,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const deleteRating = async (
+  id: string,
+  ratingId: string
+): Promise<Series> => {
+  const response = await api.delete(`/show/series/rate/${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    data: {
+      ratingId,
+    },
+  });
   return response.data;
 };

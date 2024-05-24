@@ -2,7 +2,6 @@ import { CardProps } from "@/@types";
 import { getMovies } from "@/api/show/movie";
 import { movieDataToCardProps } from "@/utils/showToCardProps";
 import { useInfiniteQuery } from "@tanstack/react-query";
-
 const useMovies = () => {
   const { data, isLoading, fetchNextPage, isFetching, hasNextPage, refetch } =
     useInfiniteQuery({

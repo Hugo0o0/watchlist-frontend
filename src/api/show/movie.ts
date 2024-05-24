@@ -72,16 +72,11 @@ export const removeBookmarkMovie = async (id: string): Promise<Movie> => {
   return response.data.data;
 };
 
-export const rateMovie = async (
-  id: string,
-  rating: number,
-  ratingId?: string
-): Promise<Movie> => {
+export const rateMovie = async (id: string, rating: number): Promise<Movie> => {
   const response = await api.post(
     `/show/movie/rate/${id}`,
     {
       rating,
-      ratingId,
     },
     {
       headers: {
@@ -89,5 +84,40 @@ export const rateMovie = async (
       },
     }
   );
+  return response.data;
+};
+
+export const updateRating = async (
+  movieId: string,
+  ratingId: string,
+  rating: number
+): Promise<Movie> => {
+  const response = await api.put(
+    `/show/movie/rate/${movieId}`,
+    {
+      ratingId,
+      rating,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const deleteRating = async (
+  id: string,
+  ratingId: string
+): Promise<Movie> => {
+  const response = await api.delete(`/show/movie/rate/${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    data: {
+      ratingId,
+    },
+  });
   return response.data;
 };

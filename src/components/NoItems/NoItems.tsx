@@ -13,7 +13,7 @@ const NoItems: FC<NoItemsProps> = ({ itemIcon, message }) => {
       {itemIcon}
       <Heading>{message}</Heading>
 
-      <Link to={"/"}>
+      <Link to={"/movies"}>
         <Button>Go back to home</Button>
       </Link>
     </div>

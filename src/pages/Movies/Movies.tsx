@@ -19,8 +19,9 @@ const Movies = () => {
   const { ref } = useInfiniteLoaderInview(handleLoadMore);
 
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value) {
-      mutate(e.target.value);
+    const value = e.target.value.trim();
+    if (value) {
+      mutate(value);
     } else {
       refetch();
     }
@@ -28,12 +29,14 @@ const Movies = () => {
 
   return (
     <div className="flex flex-col gap-5 w-full">
-      <FormInput
-        type="search"
-        onChange={debounce(handleSearch, 500)}
-        icon={<FaSearch size={20} />}
-        placeholder="Search for movies"
-      />
+      {!isLoading && (
+        <FormInput
+          type="search"
+          onChange={debounce(handleSearch, 500)}
+          icon={<FaSearch size={20} />}
+          placeholder="Search for movies"
+        />
+      )}
       <div className="gap-5">
         {<TitledCards loading={isLoading} title="Movies" items={movies} />}
         <Spinner visible={isFetching && !isLoading} />

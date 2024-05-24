@@ -1,20 +1,18 @@
-import { rateSeries } from "@/api/show/series";
+import { updateSeries } from "@/api/show/series";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
-interface MutationParams {
-  id: string;
-  rating: number;
-  ratingId?: string;
-}
-
-const useRateSeries = () => {
+const useUpdateSeries = () => {
   const queryClient = useQueryClient();
   const { id } = useParams<{ id: string }>();
   return useMutation({
-    mutationKey: ["rateSeries"],
-    mutationFn: async (params: MutationParams) => {
-      return await rateSeries(params.id, params.rating);
+    mutationKey: ["updateSeries"],
+    mutationFn: async (data: {
+      seriesId: string;
+      ratingId: string;
+      rating: number;
+    }) => {
+      return await updateSeries(data.seriesId, data.ratingId, data.rating);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -24,4 +22,4 @@ const useRateSeries = () => {
   });
 };
 
-export default useRateSeries;
+export default useUpdateSeries;

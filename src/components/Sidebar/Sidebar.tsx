@@ -15,7 +15,6 @@ const Sidebar = () => {
         <Logo />
         <SidebarLinks />
       </div>
-      <p>user</p>
     </aside>
   );
 };

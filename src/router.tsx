@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import { Home, Login, Private, Register } from "./pages";
 import Layout from "@/components/Layout/Layout";
 import Movies from "@/pages/Movies/Movies";
@@ -20,7 +20,6 @@ const router = createBrowserRouter([
           {
             errorElement: <PagesErrorFallback />,
             children: [
-              { index: true, element: <Home /> },
               {
                 path: "movies",
                 element: <Movies />,
@@ -65,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "/",
+        element: <Navigate to="/movies" />,
       },
       {
         path: "*",

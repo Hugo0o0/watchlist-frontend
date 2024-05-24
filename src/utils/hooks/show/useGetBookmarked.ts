@@ -9,8 +9,16 @@ import { useQueries } from "@tanstack/react-query";
 const useGetBookmarked = () => {
   const [movies, series] = useQueries({
     queries: [
-      { queryKey: ["bookmarkedMovies"], queryFn: getBookmarkedMovies },
-      { queryKey: ["bookmarkedSeries"], queryFn: getBookmarkedSeries },
+      {
+        queryKey: ["bookmarkedMovies"],
+        queryFn: getBookmarkedMovies,
+        refetchOnMount: true,
+      },
+      {
+        queryKey: ["bookmarkedSeries"],
+        queryFn: getBookmarkedSeries,
+        refetchOnMount: true,
+      },
     ],
   });
 

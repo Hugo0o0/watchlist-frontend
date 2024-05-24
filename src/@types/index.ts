@@ -54,11 +54,10 @@ export interface RatingData {
   userId: string;
 }
 
-export type ErrorCodes = 404 | 401 | 500;
+export type ErrorCodes = 404 | 401 | 500 | 400;
 
 export type MessageByErrorCode = {
   [key in ErrorCodes]: {
     message: string;
-    subMessage: string;
   };
 };

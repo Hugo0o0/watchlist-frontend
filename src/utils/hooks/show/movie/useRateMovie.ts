@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 interface MutationParams {
   id: string;
   rating: number;
-  ratingId?: string;
 }
 
 const useRateMovie = () => {
@@ -14,7 +13,7 @@ const useRateMovie = () => {
   return useMutation({
     mutationKey: ["rateMovie"],
     mutationFn: async (params: MutationParams) => {
-      return await rateMovie(params.id, params.rating, params.ratingId);
+      return await rateMovie(params.id, params.rating);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
