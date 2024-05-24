@@ -1,5 +1,5 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import { Home, Login, Private, Register } from "./pages";
+import { Login, Private, Register } from "./pages";
 import Layout from "@/components/Layout/Layout";
 import Movies from "@/pages/Movies/Movies";
 import Series from "@/pages/Series/Series";
