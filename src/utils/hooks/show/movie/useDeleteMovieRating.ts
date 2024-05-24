@@ -1,6 +1,8 @@
 import { deleteRating } from "@/api/show/movie";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const useDeleteMovieRating = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,6 +16,10 @@ const useDeleteMovieRating = () => {
       queryClient.invalidateQueries({
         queryKey: ["single movie", id],
       });
+    },
+    throwOnError: true,
+    onError: (err: AxiosError<{ message: string }>) => {
+      toast.error(err.response?.data.message);
     },
   });
 };

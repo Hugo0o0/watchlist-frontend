@@ -1,6 +1,8 @@
 import { rateSeries } from "@/api/show/series";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface MutationParams {
   id: string;
@@ -20,6 +22,10 @@ const useRateSeries = () => {
       queryClient.invalidateQueries({
         queryKey: ["single series", id],
       });
+    },
+    throwOnError: true,
+    onError: (err: AxiosError<{ message: string }>) => {
+      toast.error(err.response?.data.message);
     },
   });
 };

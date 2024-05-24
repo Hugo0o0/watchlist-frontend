@@ -93,7 +93,7 @@ export const updateSeries = async (
   rating: number
 ): Promise<Series> => {
   const response = await api.put(
-    `/show/series/${seriesId}`,
+    `/show/series/rate/${seriesId}`,
     {
       ratingId,
       rating,

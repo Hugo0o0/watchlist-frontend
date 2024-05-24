@@ -5,6 +5,7 @@ const useGetSingleSeries = (id?: string) => {
   return useQuery({
     queryKey: ["single series", id],
     refetchOnWindowFocus: false,
+    refetchOnMount: true,
     queryFn: getSingleSeries.bind(null, id),
   });
 };

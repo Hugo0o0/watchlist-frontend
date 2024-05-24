@@ -5,6 +5,7 @@ const useMovie = (id: string) => {
   return useQuery({
     queryKey: ["single movie", id],
     refetchOnWindowFocus: false,
+    refetchOnMount: true,
     queryFn: getMovie.bind(null, id),
   });
 };
