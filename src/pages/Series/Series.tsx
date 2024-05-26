@@ -1,48 +1,37 @@
-import TitledCards from "@/components/TitledCards/TitledCards";
-import { FormInput, Spinner } from "@/components/UI";
-import useInfiniteLoaderInview from "@/utils/hooks/useInfiniteLoaderInview";
-import { FaSearch } from "react-icons/fa";
-import debounce from "lodash.debounce";
 import useSeries from "@/utils/hooks/show/series/useSeries";
 import useSearchSeries from "@/utils/hooks/show/series/useSearchSeries";
+import InfinitePage from "@/components/InfinitePage/InfinitePage";
+import { Series as SeriesType } from "@/@types/show/series";
+import { Card } from "@/components/UI";
 
 const Series = () => {
-  const { series, fetchNextPage, isFetching, isLoading, hasNextPage, refetch } =
-    useSeries();
-  const { mutate } = useSearchSeries();
-  const handleLoadMore = (inView: boolean) => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-  };
-
-  const { ref } = useInfiniteLoaderInview(handleLoadMore);
-
-  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.trim();
-    if (value.length >= 3) {
-      mutate(value);
-    } else {
-      refetch();
-    }
-  };
+  const queryResult = useSeries();
+  const mutation = useSearchSeries();
 
   return (
-    <div className="flex flex-col gap-5 w-full">
-      {!isLoading && (
-        <FormInput
-          type="search"
-          onChange={debounce(handleSearch, 500)}
-          icon={<FaSearch size={20} />}
-          placeholder="Search for series"
-        />
-      )}
-      <div className="gap-5">
-        {<TitledCards loading={isLoading} title="Series" items={series} />}
-        <Spinner visible={isFetching && !isLoading} />
-        <div ref={ref} />
+    <InfinitePage
+      pageTitle="Series"
+      queryResult={queryResult}
+      mutation={mutation}
+    >
+      <div className="flex flex-wrap gap-10">
+        {queryResult.data?.pages.flatMap((page: any) =>
+          page.data.map((item: SeriesType) => (
+            <Card
+              name={item.name}
+              size="medium"
+              src={item.poster.large}
+              status={item.status}
+              to={`/series/${item.id}`}
+              type="series"
+              year={new Date(item.firstAirDate).getFullYear()}
+              loading={queryResult.isLoading}
+              key={item.id}
+            />
+          ))
+        )}
       </div>
-    </div>
+    </InfinitePage>
   );
 };
 

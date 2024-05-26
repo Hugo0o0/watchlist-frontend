@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { FC, forwardRef } from "react";
-import Spinner from "../../Spinner/Spinner";
+import { CircularProgress } from "@mui/material";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
@@ -18,7 +18,7 @@ const Button: FC<ButtonProps> = forwardRef(({ loading, btnRef, ...props }) => {
 
   return (
     <button ref={btnRef} disabled={loading} className={className} {...props}>
-      {loading ? <Spinner /> : props.children}
+      {loading ? <CircularProgress /> : props.children}
     </button>
   );
 });

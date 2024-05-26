@@ -1,6 +1,7 @@
 import BookmarkSeries from "@/components/BookmarkSeries/BookmarkSeries";
 import RateSeries from "@/components/RateSeries/RateSeries";
 import RateSeriesModal from "@/components/RateSeriesModal/RateSeriesModal";
+import SeriesImageWithDetails from "@/components/SeriesImageWithDetails/SeriesImageWithDetails";
 import { Chip, Heading, Text } from "@/components/UI";
 import useGetSingleSeries from "@/utils/hooks/show/series/useGetSingleSeries";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
@@ -32,15 +33,7 @@ const SeriesDetails = () => {
       animate={{ opacity: 1 }}
       className="w-full p-5 flex gap-5 flex-col md:flex-row md:gap-10"
     >
-      <RateSeriesModal open={openModal} close={handleModal} />
-      <img
-        src={data?.poster.large}
-        alt={data?.name}
-        className="h-[65rem]"
-        onError={(e) => {
-          e.currentTarget.src = "https://placehold.co/433X650";
-        }}
-      />
+      <SeriesImageWithDetails data={data} />
       <div className="w-full flex flex-col gap-5">
         {/* İsim, yer işareti, oyla */}
         <div className="flex flex-col md:flex-row md:gap-10 justify-between items-center">
@@ -49,15 +42,6 @@ const SeriesDetails = () => {
             <Text>
               ({firstAirYear} - {lastAirYear})
             </Text>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-3">
-              <FaStar />
-              <Text>{data.averageRating.toFixed(1)} / 10</Text>
-            </div>
-
-            <BookmarkSeries bookmarked={data.bookmarked} />
-            <RateSeries rated={Boolean(data.rating)} onClick={handleModal} />
           </div>
         </div>
         <Text size="m">{data?.overview}</Text>

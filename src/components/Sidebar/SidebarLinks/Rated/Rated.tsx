@@ -1,22 +1,15 @@
 import { SidebarIconProps } from "@/@types";
 import { motion } from "framer-motion";
 import { FaStar } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Rated = ({ size }: SidebarIconProps) => {
   // @ts-ignore
   const MotionNavLink = motion(NavLink);
 
-  const isMatch = useLocation().pathname === "/rated";
-  const props = isMatch
-    ? {
-        initial: { scale: 0.5 },
-        animate: { scale: 1 },
-      }
-    : {};
   return (
     <MotionNavLink
-      {...props}
+      whileHover={{ scale: 1.1 }}
       className={({ isActive }) =>
         [isActive ? "[&>*]:fill-white" : "[&>*]:fill-kashmir-blue"].join(" ")
       }

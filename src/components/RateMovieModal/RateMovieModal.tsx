@@ -58,7 +58,7 @@ const RateMovieModal: FC<RateMovieModalProps> = ({ open, close }) => {
     isPending || isUpdatePending || isDeletePending || isMoviePending;
 
   return (
-    <Dialog open={open} onClose={!isPending ? close : () => {}}>
+    <Dialog open={open} onClose={!isLoading ? close : () => {}}>
       <DialogContent className="flex flex-col gap-5 items-center">
         <Heading size="m">Rate {data?.title}</Heading>
         <Rating

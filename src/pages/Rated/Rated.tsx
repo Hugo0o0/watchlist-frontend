@@ -5,9 +5,7 @@ import { MdMovie } from "react-icons/md";
 
 const Rated = () => {
   const { movies, series, isLoading } = useGetRated();
-
   const hasRatedShows = movies.length > 0 || series.length > 0;
-
   return (
     <div className="w-full flex flex-col gap-5">
       <TitledCards loading={isLoading} title="Movies" items={movies} />

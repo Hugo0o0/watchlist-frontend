@@ -14,7 +14,7 @@ const TitledCards: FC<TitledCardsProps> = ({ title, items, loading }) => {
   return (
     <div className="flex flex-col gap-5">
       {items && items?.length > 0 && <Heading size="l">{title}</Heading>}
-      <div className="grid transition-all justify-items-center md:justify-items-start grid-cols-2  sm:grid-cols-auto-responsive gap-5">
+      <div className="flex flex-wrap transition-all  gap-8">
         {items && items.map((item) => <Card {...item} />)}
       </div>
     </div>

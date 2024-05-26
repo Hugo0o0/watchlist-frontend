@@ -1,29 +1,18 @@
-import BookmarkMovies from "@/components/BookmarkMovies/BookmarkMovies";
-import RateMovie from "@/components/RateMovie/RateMovie";
-import RateMovieModal from "@/components/RateMovieModal/RateMovieModal";
-import { Chip, Heading, Text } from "@/components/UI";
+import { Heading, Text } from "@/components/UI";
 import useMovie from "@/utils/hooks/show/movie/useMovie";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { FaImdb, FaMoneyBill, FaStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import { CiTimer } from "react-icons/ci";
-import abbreviateNumber from "@/utils/abbreviateNumber";
+import { Chip, CircularProgress } from "@mui/material";
+import MovieImageWithDetails from "@/components/MovieImageWithDetails/MovieImageWithDetails";
 
 const MovieDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useMovie(id!);
-  const [openModal, setOpenModal] = useState(false);
 
-  if (isLoading || !data) return <div>Loading...</div>;
+  if (isLoading || !data)
+    return <CircularProgress className="mx-auto" size={40} />;
 
   const releaseDate = new Date(data?.releaseDate!).getFullYear();
-
-  const handleModal = () => {
-    setOpenModal((prev) => !prev);
-  };
-
-  const abbreviatedRevenue = abbreviateNumber(data.revenue);
 
   return (
     <motion.div
@@ -31,17 +20,7 @@ const MovieDetails = () => {
       animate={{ opacity: 1 }}
       className="w-full p-5 flex gap-5 flex-col md:flex-row md:gap-10"
     >
-      <img
-        src={data?.poster.large}
-        alt={data?.title}
-        className="h-[65rem]"
-        onError={(e) => {
-          e.currentTarget.src = "https://placehold.co/433X650";
-        }}
-        onScroll={(e) => {
-          console.log(e);
-        }}
-      />
+      <MovieImageWithDetails data={data} />
 
       <div className="w-full flex flex-col gap-5">
         <div className="flex flex-col md:flex-row md:gap-10 justify-between items-center">
@@ -49,42 +28,19 @@ const MovieDetails = () => {
             <Heading size="l">{data?.title}</Heading>
             <Text>({releaseDate})</Text>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-3">
-              <FaStar />
-              <Text>{data?.averageRating.toFixed(1)} / 10</Text>
-            </div>
-
-            <RateMovieModal open={openModal} close={handleModal} />
-            <div className="flex gap-2 items-center">
-              <CiTimer />
-              <Text>{data?.runtime} min</Text>
-            </div>
-            <a
-              href={`https://www.imdb.com/title/${data.imdbId}`}
-              target="_blank"
-            >
-              <FaImdb size={25} />
-            </a>
-
-            {data.revenue > 100_000 && (
-              <div className="flex gap-2 items-center">
-                <FaMoneyBill />
-                <Text>{abbreviatedRevenue} </Text>
-              </div>
-            )}
-
-            <BookmarkMovies bookmarked={data?.bookmarked} />
-            <RateMovie rated={Boolean(data?.rating)} onClick={handleModal} />
-          </div>
         </div>
         <Text size="m">{data?.overview}</Text>
         {data.genres.length > 0 && (
           <div className="flex flex-col gap-3">
             <Heading>Genres</Heading>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-wrap items-center gap-5">
               {data?.genres.map((genre) => (
-                <Chip label={genre.name} key={genre.id} />
+                <Chip
+                  sx={{ fontSize: "1.3rem" }}
+                  color="error"
+                  label={genre.name}
+                  key={genre.id}
+                />
               ))}
             </div>
           </div>
@@ -93,9 +49,14 @@ const MovieDetails = () => {
         {data.productionCompanies.length > 0 && (
           <div className="flex flex-col gap-3">
             <Heading>Production Companies</Heading>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-wrap items-center gap-5">
               {data?.productionCompanies.map((company) => (
-                <Chip label={company.name} key={company.id} />
+                <Chip
+                  sx={{ fontSize: "1.3rem" }}
+                  color="error"
+                  label={company.name}
+                  key={company.id}
+                />
               ))}
             </div>
           </div>
@@ -104,9 +65,14 @@ const MovieDetails = () => {
         {data.productionCountries.length > 0 && (
           <div className="flex flex-col gap-3">
             <Heading>Production Countries</Heading>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-wrap items-center gap-5">
               {data?.productionCountries.map((country) => (
-                <Chip label={country.name} key={country.id} />
+                <Chip
+                  sx={{ fontSize: "1.3rem" }}
+                  color="error"
+                  label={country.name}
+                  key={country.id}
+                />
               ))}
             </div>
           </div>

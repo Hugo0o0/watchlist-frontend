@@ -7,8 +7,17 @@ const useSearchMovie = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (query: string) => searchMovies(query),
+    onMutate: () => {
+      queryClient.cancelQueries({ queryKey: ["movies"] });
+    },
     onSuccess: (data) => {
       queryClient.setQueryData(["movies"], (prev: any) => {
+        if (!prev) {
+          return {
+            pageParams: [1],
+            pages: [data],
+          };
+        }
         return {
           ...prev,
           pages: [data],

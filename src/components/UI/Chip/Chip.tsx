@@ -6,7 +6,7 @@ interface ChipProps {
 }
 const Chip: FC<ChipProps> = ({ label }) => {
   return (
-    <div className="bg-primary px-3 py-2 rounded-full flex items-center justify-center">
+    <div className="bg-primary w-fit h-[3rem] px-3 py-2 rounded-full flex items-center justify-center">
       <Text>{label}</Text>
     </div>
   );

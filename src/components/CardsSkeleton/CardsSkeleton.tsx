@@ -21,12 +21,12 @@ const CardsSkeleton: FC<CardsSkeletonProps> = ({ size, count }) => {
   });
   return (
     <SkeletonTheme
-      duration={1.5}
+      duration={1}
       baseColor="#161D2F"
-      highlightColor="#10141E"
+      highlightColor="#1d273e"
       direction="ltr"
     >
-      <div className="grid transition-all justify-items-center md:justify-items-start grid-cols-2  sm:grid-cols-auto-responsive gap-5">
+      <div className="grid gap-5 grid-cols-2 sm:grid-cols-auto-responsive justify-items-center md:justify-items-start transition-all w-full">
         {Array.from({ length: count }).map(() => (
           <div className={cardSkeletonClasses} key={Math.random() * 10}>
             <Skeleton className={imageSkeletonClasses} />
